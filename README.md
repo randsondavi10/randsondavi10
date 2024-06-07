@@ -1,42 +1,73 @@
-# Rabit: Reliable Allreduce and Broadcast Interface
-[![Build Status](https://travis-ci.org/dmlc/rabit.svg?branch=master)](https://travis-ci.org/dmlc/rabit)
-[![Documentation Status](https://readthedocs.org/projects/rabit/badge/?version=latest)](http://rabit.readthedocs.org/)
+[![Packaging status](https://repology.org/badge/tiny-repos/bear-clang.svg)](https://repology.org/project/bear-clang/versions)
+[![GitHub release](https://img.shields.io/github/release/rizsotto/Bear)](https://github.com/rizsotto/Bear/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/rizsotto/Bear)](https://github.com/rizsotto/Bear/releases)
+[![Continuous Integration](https://github.com/rizsotto/Bear/workflows/continuous%20integration/badge.svg)](https://github.com/rizsotto/Bear/actions)
+[![Contributors](https://img.shields.io/github/contributors/rizsotto/Bear)](https://github.com/rizsotto/Bear/graphs/contributors)
+[![Gitter](https://img.shields.io/gitter/room/rizsotto/Bear)](https://gitter.im/rizsotto/Bear)
 
-## Recent developments of Rabit have been moved into [dmlc/xgboost](https://github.com/dmlc/xgboost). See discussion in [dmlc/xgboost#5995](https://github.com/dmlc/xgboost/issues/5995).
+ʕ·ᴥ·ʔ Build EAR  
+===============
 
-rabit is a light weight library that provides a fault tolerant interface of Allreduce and Broadcast. It is designed to support easy implementations of distributed machine learning programs, many of which fall naturally under the Allreduce abstraction. The goal of rabit is to support ***portable*** , ***scalable*** and ***reliable*** distributed machine learning programs.
+Bear is a tool that generates a compilation database for clang tooling.
 
-* [Tutorial](guide)
-* [API Documentation](http://homes.cs.washington.edu/~tqchen/rabit/doc)
-* You can also directly read the [interface header](include/rabit.h)
-* [XGBoost](https://github.com/dmlc/xgboost)
-  - Rabit is one of the backbone library to support distributed XGBoost
+The [JSON compilation database][JSONCDB] is used in the clang project
+to provide information on how a single compilation unit is processed.
+With this, it is easy to re-run the compilation with alternate programs.
 
-## Features
-All these features comes from the facts about small rabbit:)
-* Portable: rabit is light weight and runs everywhere
-  - Rabit is a library instead of a framework, a program only needs to link the library to run
-  - Rabit only replies on a mechanism to start program, which was provided by most framework
-  - You can run rabit programs on many platforms, including Yarn(Hadoop), MPI using the same code
-* Scalable and Flexible: rabit runs fast
-  * Rabit program use Allreduce to communicate, and do not suffer the cost between iterations of MapReduce abstraction.
-  - Programs can call rabit functions in any order, as opposed to frameworks where callbacks are offered and called by the framework, i.e. inversion of control principle.
-  - Programs persist over all the iterations, unless they fail and recover.
-* Reliable: rabit dig burrows to avoid disasters
-  - Rabit programs can recover the model and results using synchronous function calls.
-  - Rabit programs can set rabit_boostrap_cache=1 to support allreduce/broadcast operations before loadcheckpoint
-  `
-    rabit::Init(); -> rabit::AllReduce(); -> rabit::loadCheckpoint(); -> for () { rabit::AllReduce(); rabit::Checkpoint();} -> rabit::Shutdown();
-  `
+Some build system natively supports the generation of JSON compilation
+database. For projects which does not use such build tool, Bear generates
+the JSON file during the build process.
 
-## Use Rabit
-* Type make in the root folder will compile the rabit library in lib folder
-* Add lib to the library path and include to the include path of compiler
-* Languages: You can use rabit in C++ and python
-  - It is also possible to port the library to other languages
+  [JSONCDB]: http://clang.llvm.org/docs/JSONCompilationDatabase.html
 
-## Contributing
-Rabit is an open-source library, contributions are welcomed, including:
-* The rabit core library.
-* Customized tracker script for new platforms and interface of new languages.
-* Tutorial and examples about the library.
+How to install
+--------------
+
+Bear is [packaged](https://repology.org/project/bear-clang/versions) for many
+distributions. Check out your package manager. Or [build it](INSTALL.md)
+from source.
+
+How to use
+----------
+
+After installation the usage is like this:
+
+    bear -- <your-build-command>
+
+The output file called `compile_commands.json` is saved in the current directory.
+
+For more options you can check the man page or pass `--help` parameter. Note
+that if you want to pass parameter to Bear, pass those _before_ the `--` sign,
+everything after that will be the build command. 
+
+Please be aware that some package manager still ship our old 2.4.x release. 
+In that case please omit the extra `--` sign or consult your local documentation.
+
+For more, read the man pages or [wiki][WIKI] of the project, which talks about
+limitations, known issues and platform specific usage. 
+
+Problem reports
+---------------
+
+Before you open a new problem report, please look at the [wiki][WIKI] if your
+problem is a known one with documented workaround. It's also helpful to look
+at older (maybe closed) [issues][ISSUES] before you open a new one.  
+
+If you decided to report a problem, try to give as much context as it would
+help me to reproduce the error you see. If you just have a question about the
+usage, please don't be shy, ask your question in an issue or in [chat][CHAT].
+
+If you found a bug, but also found a fix for it, please share it with me and
+open a pull request.
+
+Please follow the [contribution guide][GUIDE] when you do these.
+
+  [ISSUES]: https://github.com/rizsotto/Bear/issues
+  [WIKI]: https://github.com/rizsotto/Bear/wiki
+  [CHAT]: https://gitter.im/rizsotto/Bear
+  [GUIDE]: https://github.com/rizsotto/Bear/blob/master/CONTRIBUTING.md
+
+---
+
+Thanks to [JetBrains](https://www.jetbrains.com/?from=Bear)
+for donating product licenses to help develop Bear
