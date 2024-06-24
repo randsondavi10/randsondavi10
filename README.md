@@ -1,26 +1,14 @@
-# Analyzing Messi and Ronaldo's Games using Python and Streamlit [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/adilmoujahid/streamlit-messi-ronaldo/master/app.py/+/)
+# Anime-Girls-Holding-Programming-Books
+Anime Girls Holding Programming Books
 
-* Source Code for my blog post: [Analyzing Messi and Ronaldo's Games using Python and Streamlit](http://adilmoujahid.com/posts/2020/06/streamlit-messi-ronaldo/)
+# Contribution Guidelines
 
-<div style="display:block;margin:auto;height:80%;width:80%">
-  <img src="streamlit-messi-ronaldo.gif">
-</div>
+* __NSFW images aren't allowed due to [Github Site Policy](https://docs.github.com/en/site-policy);__
 
-# Dependencies
+* Pictures can't be related to cryptocurrency or its technologies;
+* Images must have descriptive file names in the following format (The file doesn't have to be "png" format, this is just an example):
+    Name_Name_Book_Book.png
 
-- Works with ```Python 3.7``` 
-- All Python dependencies are in ```requirements.txt```. You can install these dependencies by running the following command:
+* Add your images to the folder that best describes the subject matter of the book that the girl is holding. If no existing folder applies, create a new one. The simpler the name, the better;
 
-* ```pip install -r requirements.txt```
-
-# Run the App
-
-* From your terminal, execute: ```streamlit run app.py```
-* Open ```http://localhost:8501``` in your browser
-
-# References
-[1] Pappalardo et al., (2019) A public data set of spatio-temporal match events in soccer competitions, Nature Scientific Data 6:236, https://www.nature.com/articles/s41597-019-0247-7
-
-[2] https://figshare.com/articles/Events/7770599
-
-# Visit my Blog : http://adilmoujahid.com
+* All characters must be female presenting (either canonically female or look/act like girls).
